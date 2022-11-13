@@ -6,7 +6,7 @@
 import * as express from 'express';
 import * as path from 'path';
 import userRouter from './router/user';
-import { checkInit } from './module/orm/pg';
+import { checkInit } from './modules/orm/pg';
 
 const app = express();
 

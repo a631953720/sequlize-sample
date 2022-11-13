@@ -5,8 +5,8 @@ import {
   updateAliasByUserId,
   deleteUserByUserId,
   findAllUser,
-} from '../module/user';
-import { createUserAuth } from '../module/usetAuth';
+} from '../modules/user';
+import { createUserAuth } from '../modules/usetAuth';
 
 const router = Router();
 
