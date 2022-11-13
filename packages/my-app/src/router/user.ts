@@ -6,6 +6,7 @@ import {
   deleteUserByUserId,
   findAllUser,
 } from '../module/user';
+import { createUserAuth } from '../module/usetAuth';
 
 const router = Router();
 
@@ -59,6 +60,19 @@ router.delete('/:id', async (req, res) => {
 
   if (result) return res.status(200).send('ok');
   else return res.status(500).send('error');
+});
+
+createUser({
+  Name: 'kk',
+  Password: '123456',
+  Alias: ''
+}).then((data) => {
+  createUserAuth({
+    UserId: data.id,
+    Token: '',
+    TokenExpiredAt: new Date(),
+    RefreshToken: ''
+  });
 });
 
 export default router;

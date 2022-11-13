@@ -1,5 +1,6 @@
 import { DataTypes, Optional, Model } from 'sequelize';
 import { sequelize } from './pg';
+import { UserAuth } from './userAuth';
 
 type UserAttributes = {
   id: number;
@@ -10,13 +11,16 @@ type UserAttributes = {
 
 type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
-export const User = sequelize.define<Model<UserAttributes, UserCreationAttributes>>(
+export const User = sequelize.define<
+  Model<UserAttributes, UserCreationAttributes>
+>(
   'User',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
     },
     Name: {
       type: DataTypes.STRING,
@@ -32,7 +36,8 @@ export const User = sequelize.define<Model<UserAttributes, UserCreationAttribute
     },
   },
   {
-    tableName: 'User',
+    tableName: 'Users',
   }
 );
 
+User.hasOne(UserAuth);
