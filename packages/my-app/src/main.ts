@@ -13,7 +13,7 @@ const app = express();
 app.use(async (_req, res, next) => {
   const isConnect = await checkInit();
   if (isConnect) return next();
-  else res.status(500).json({ errorMessage: 'DB error' });
+  else return res.status(500).json({ errorMessage: 'DB error' });
 });
 app.use(express.json());
 app.use('/user', userRouter);
