@@ -1,11 +1,5 @@
 import { Router } from 'express';
-import {
-  findUserByUserId,
-  createUser,
-  updateAliasByUserId,
-  deleteUserByUserId,
-  findAllUser,
-} from '../modules/user';
+import { findUserByUserId, createUser, updateAliasByUserId, deleteUserByUserId, findAllUser } from '../modules/user';
 import { createUserAuth } from '../modules/usetAuth';
 
 const router = Router();
@@ -65,13 +59,13 @@ router.delete('/:id', async (req, res) => {
 createUser({
   Name: 'kk',
   Password: '123456',
-  Alias: ''
+  Alias: '',
 }).then((data) => {
   createUserAuth({
     UserId: data.id,
     Token: '',
     TokenExpiredAt: new Date(),
-    RefreshToken: ''
+    RefreshToken: '',
   });
 });
 

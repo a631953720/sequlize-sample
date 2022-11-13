@@ -16,7 +16,7 @@ export async function createUserAuth(options: CreateUserOptions) {
       UserId,
       Token,
       TokenExpiredAt,
-      RefreshToken
+      RefreshToken,
     });
 
     return result.dataValues;

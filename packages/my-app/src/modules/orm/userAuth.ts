@@ -3,7 +3,7 @@ import { sequelize } from './pg';
 
 type UserAuthAttributes = {
   id: number;
-  UserId: number,
+  UserId: number;
   Token: string;
   RefreshToken: string;
   TokenExpiredAt: Date;
@@ -22,21 +22,21 @@ export const UserAuth = sequelize.define<Model<UserAuthAttributes, UserAuthCreat
     },
     UserId: {
       type: DataTypes.INTEGER,
-      unique: true
+      unique: true,
     },
     Token: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
     RefreshToken: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
     },
     TokenExpiredAt: {
-      type: DataTypes.DATE
-    }
+      type: DataTypes.DATE,
+    },
   },
   {
-    tableName: 'UserAuths'
+    tableName: 'UserAuths',
   }
 );

@@ -1,4 +1,4 @@
-import { User } from "./orm/user";
+import { User } from './orm/user';
 
 export async function findAllUser() {
   try {
@@ -34,15 +34,7 @@ export async function findUserByUserId(id: number) {
   }
 }
 
-export async function createUser({
-  Name,
-  Password,
-  Alias,
-}: {
-  Name: string;
-  Password: string;
-  Alias: string;
-}) {
+export async function createUser({ Name, Password, Alias }: { Name: string; Password: string; Alias: string }) {
   try {
     const result = await User.create({
       Name,
@@ -57,13 +49,7 @@ export async function createUser({
   }
 }
 
-export async function updatePswByUserId({
-  id,
-  Password,
-}: {
-  id: number;
-  Password: string;
-}) {
+export async function updatePswByUserId({ id, Password }: { id: number; Password: string }) {
   try {
     await User.update(
       { Password },
@@ -80,13 +66,7 @@ export async function updatePswByUserId({
   }
 }
 
-export async function updateAliasByUserId({
-  id,
-  Alias,
-}: {
-  id: number;
-  Alias: string;
-}) {
+export async function updateAliasByUserId({ id, Alias }: { id: number; Alias: string }) {
   try {
     await User.update(
       { Alias },
@@ -103,13 +83,7 @@ export async function updateAliasByUserId({
   }
 }
 
-export async function updatePswByUserName({
-  Name,
-  Password,
-}: {
-  Name: string;
-  Password: string;
-}) {
+export async function updatePswByUserName({ Name, Password }: { Name: string; Password: string }) {
   try {
     await User.update(
       { Password },
@@ -126,13 +100,7 @@ export async function updatePswByUserName({
   }
 }
 
-export async function updateAliasByUserName({
-  Name,
-  Alias,
-}: {
-  Name: string;
-  Alias: string;
-}) {
+export async function updateAliasByUserName({ Name, Alias }: { Name: string; Alias: string }) {
   try {
     await User.update(
       { Alias },

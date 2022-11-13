@@ -11,9 +11,7 @@ type UserAttributes = {
 
 type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
-export const User = sequelize.define<
-  Model<UserAttributes, UserCreationAttributes>
->(
+export const User = sequelize.define<Model<UserAttributes, UserCreationAttributes>>(
   'User',
   {
     id: {
