@@ -1,7 +1,16 @@
-import { utils } from './utils';
+import { generateSalt, hashTheString } from './utils';
 
 describe('utils', () => {
-    it('should work', () => {
-        expect(utils()).toEqual('utils');
-    })
-})
+  it('generate salt can work', async () => {
+    const salt = await generateSalt();
+    
+    expect(typeof salt).toEqual('string');
+  });
+
+  it('hashTheString can work', async () => {
+    const salt = await generateSalt();
+    const hash = await hashTheString('123456', salt);
+
+    expect(hash.includes(salt)).toEqual(true);
+  });
+});
