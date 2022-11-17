@@ -2,16 +2,19 @@ import { DataTypes, Optional, Model } from 'sequelize';
 import { sequelize } from './pg';
 import { UserAuth } from './userAuth';
 
-type UserAttributes = {
+export type UserAttributes = {
   id: number;
   Name: string;
   Password: string;
+  Salt: string;
   Alias: string;
 };
 
 type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
-export const User = sequelize.define<Model<UserAttributes, UserCreationAttributes>>(
+type UserModelAttributes = Model<UserAttributes, UserCreationAttributes>;
+
+export const User = sequelize.define<UserModelAttributes>(
   'User',
   {
     id: {
@@ -26,6 +29,10 @@ export const User = sequelize.define<Model<UserAttributes, UserCreationAttribute
       allowNull: false,
     },
     Password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Salt: {
       type: DataTypes.STRING,
       allowNull: false,
     },
