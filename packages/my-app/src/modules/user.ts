@@ -1,4 +1,5 @@
 import { User } from './orm/user';
+import { generateSalt, hashTheString } from "@utils";
 
 export async function findAllUser() {
   try {
@@ -36,9 +37,11 @@ export async function findUserByUserId(id: number) {
 
 export async function createUser({ Name, Password, Alias }: { Name: string; Password: string; Alias: string }) {
   try {
+    const salt = await generateSalt();
     const result = await User.create({
       Name,
-      Password,
+      Salt: salt,
+      Password: await hashTheString(Password, salt),
       Alias,
     });
 

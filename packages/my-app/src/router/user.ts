@@ -1,8 +1,15 @@
 import { Router } from 'express';
+import { UserAttributes } from '../modules/orm/user';
 import { findUserByUserId, createUser, updateAliasByUserId, deleteUserByUserId, findAllUser } from '../modules/user';
-import { createUserAuth } from '../modules/usetAuth';
 
 const router = Router();
+
+function userResponseDTO(data: UserAttributes) {
+  delete data.Password;
+  delete data.Salt;
+
+  return data;
+}
 
 router.get('/list', async (req, res) => {
   const result = await findAllUser();
@@ -10,8 +17,7 @@ router.get('/list', async (req, res) => {
 
   return res.status(200).json(
     result.map((user) => {
-      delete user.Password;
-      return user;
+      return userResponseDTO(user);
     })
   );
 });
@@ -22,8 +28,7 @@ router.get('/:id', async (req, res) => {
   const result = await findUserByUserId(id);
   if (result === null) return res.status(404).send('not found');
 
-  delete result.Password;
-  return res.status(200).json(result);
+  return res.status(200).json(userResponseDTO(result));
 });
 
 router.post('/', async (req, res) => {
@@ -31,8 +36,7 @@ router.post('/', async (req, res) => {
   const result = await createUser({ Name, Alias, Password });
 
   if (result) {
-    delete result.Password;
-    return res.status(201).json(result);
+    return res.status(201).json(userResponseDTO(result));
   } else return res.status(500).send('error');
 });
 
@@ -54,19 +58,6 @@ router.delete('/:id', async (req, res) => {
 
   if (result) return res.status(200).send('ok');
   else return res.status(500).send('error');
-});
-
-createUser({
-  Name: 'kk',
-  Password: '123456',
-  Alias: '',
-}).then((data) => {
-  createUserAuth({
-    UserId: data.id,
-    Token: '',
-    TokenExpiredAt: new Date(),
-    RefreshToken: '',
-  });
 });
 
 export default router;
