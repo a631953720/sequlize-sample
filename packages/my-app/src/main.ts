@@ -7,7 +7,6 @@ import * as express from 'express';
 import * as path from 'path';
 import userRouter from './router/user';
 import { checkInit } from './modules/orm/pg';
-import { generateSalt, hashTheString } from "@utils";
 
 const app = express();
 
@@ -29,18 +28,3 @@ const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
 });
 server.on('error', console.error);
-
-const string = '123456';
-
-// 每次產生會不固定
-generateSalt().then((salt) => {
-  console.log(salt);
-  hashTheString(string, salt).then((b)=>{
-    console.log(b);
-  });
-});
-
-// 固定的鹽，會生出固定結果
-hashTheString(string, '$2b$10$gOZBVSEAtyBIvzVucrTdOO').then((b)=>{
-  console.log(b);
-});
